@@ -1,0 +1,48 @@
+{
+	"engineStrict": true,
+	"engines": {
+		"node": ">=12",
+		"npm": ">=6"
+	},
+	"version": "1.0.0",
+	"description": "Playwright GUI",
+	"author": "Aleksandr Meshcheriakov",
+	"name": "playwright-gui-electron",
+	"private": true,
+	"main": "dist/index.js",
+	"scripts": {
+		"prebuild": "yarn electron-builder install-app-deps",
+		"pack": "yarn electron-builder --dir",
+		"dist": "yarn electron-builder",
+		"build": "yarn tsc",
+		"start": "yarn electron ./dist/index.js",
+		"all": "yarn build && yarn dist && yarn pack"
+	},
+	"devDependencies": {
+		"electron": "^30.0.3",
+		"electron-builder": "^24.13.3",
+		"playwright": "^1.44.0",
+		"typescript": "^5.4.5"
+	},
+	"build": {
+		"appId": "com.alexmesch.playwright.gui",
+		"mac": {
+			"category": "private.qa.utilities",
+			"target": [
+				"dmg",
+				"zip"
+			]
+		},
+		"win": {
+			"target": "NSIS"
+		},
+		"files": [
+			"dist/**/*",
+			"node_modules/**/*"
+		],
+		"directories": {
+			"buildResources": "assets",
+			"output": "release"
+		}
+	}
+}
